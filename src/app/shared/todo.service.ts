@@ -12,4 +12,11 @@ export class TodoService {
   constructor(private firestore: AngularFirestore) {
     this.firestoreCollection = firestore.collection('todos');
   }
+
+  addTodo(title: string) {
+    this.firestoreCollection.add({
+      title,
+      isDone: false,
+    });
+  }
 }
