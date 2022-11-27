@@ -9,5 +9,10 @@
         <i class="fa-solid fa-circle-plus fa-xl"></i>
       </button>
     </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of todos">
+        <span>{{ item.title }}</span>
+      </li>
+    </ul>
   </div>
 </div>

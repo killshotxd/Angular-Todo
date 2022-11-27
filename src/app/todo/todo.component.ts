@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styles: [],
 })
 export class TodoComponent implements OnInit {
+  todos: any[] = [];
   constructor(private TodoService: TodoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.TodoService.firestoreCollection.valueChanges().subscribe((item) => {
+      this.todos = item;
+    });
+  }
 
   onClick(titleInp: HTMLInputElement) {
     if (titleInp.value) {
