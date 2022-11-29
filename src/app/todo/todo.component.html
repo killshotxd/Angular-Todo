@@ -11,7 +11,16 @@
     </div>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let item of todos">
-        <span>{{ item.title }}</span>
+        <span>
+          <i
+            class="text-success"
+            (click)="onStatusChange(item.id, !item.isDone)"
+            [ngClass]="
+              item.isDone ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'
+            "
+          ></i>
+          {{ item.title }}</span
+        >
       </li>
     </ul>
   </div>

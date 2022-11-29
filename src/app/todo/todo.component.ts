@@ -11,9 +11,11 @@ export class TodoComponent implements OnInit {
   constructor(private TodoService: TodoService) {}
 
   ngOnInit(): void {
-    this.TodoService.firestoreCollection.valueChanges().subscribe((item) => {
-      this.todos = item;
-    });
+    this.TodoService.firestoreCollection
+      .valueChanges({ idField: 'id' })
+      .subscribe((item) => {
+        this.todos = item;
+      });
   }
 
   onClick(titleInp: HTMLInputElement) {
@@ -21,5 +23,9 @@ export class TodoComponent implements OnInit {
       this.TodoService.addTodo(titleInp.value);
       titleInp.value = '';
     }
+  }
+
+  onStatusChange(id: string, newStatus: boolean) {
+    this.TodoService.updateTodoStatus(id, newStatus);
   }
 }
