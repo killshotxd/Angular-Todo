@@ -14,7 +14,9 @@ export class TodoComponent implements OnInit {
     this.TodoService.firestoreCollection
       .valueChanges({ idField: 'id' })
       .subscribe((item) => {
-        this.todos = item;
+        this.todos = item.sort((a: any, b: any) => {
+          return a.isDone - b.isDone;
+        });
       });
   }
 
@@ -27,5 +29,9 @@ export class TodoComponent implements OnInit {
 
   onStatusChange(id: string, newStatus: boolean) {
     this.TodoService.updateTodoStatus(id, newStatus);
+  }
+
+  onDelete(id: string) {
+    this.TodoService.deleteTodo(id);
   }
 }
